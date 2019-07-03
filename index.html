@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/TweenMax.min.js"></script>
+  <script type="text/javascript" src="js/TweenLite.min.js"></script>
+  <script type="text/javascript" src="js/TimelineMax.min.js"></script>
+  <script type="text/javascript" src="js/TimelineLite.min.js"></script>
+  <script type="text/javascript" src="js/TextPlugin.min.js"></script>
+  <script type="text/javascript" src="js/Vue.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animate.css">
+</head>
+<body>
+
+
+<div id="app">
+    <section>
+      <div class="card-wrapper">
+        <div v-for="(person, index) in people" class="card card-person"> 
+          <!-- index of the element gives access to the el_De -->
+          <h3 v-if="person.name">
+            {{ person.name }}
+          </h3>
+          <h3 v-else>Some nice person</h3>
+          <p>
+            phone:
+            <b v-if="person.phone">{{ person.phone }}</b>
+            <b v-else>No phone number</b>
+          </p>
+
+
+          <div class="card-footer">
+            <button v-on:click="editPerson(index)" class="btn btn-grey btn-square">
+              <i class="ion ion-android-create"></i>
+            </button>
+            <button v-on:click="deletePerson(index)" class="btn btn-danger btn-square">
+              <i class="ion ion-android-delete"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <h2 v-if="people.length">
+      People <span class="counter">{{ people.length }}</span>
+    </h2>
+    <div v-else>
+      <h3>You haven't added anyone yet</h3>
+      <p>
+        Click on the button below to add someone.
+      </p>
+    </div>
+    <div class="container">
+      <section>
+        <button v-if="!showPerson" v-on:click="showAddPerson" class="btn btn-primary">
+          Add a person
+          <i class="ion ion-android-add"></i>
+        </button>
+    
+        <div v-if="showPerson" class="card card-form">    
+          <div class="form">
+            <label>
+              <span>Name</span>
+              <input type="text" maxLength="20" v-model="newPerson.name" placeholder="Name">
+            </label>
+    
+            <label>
+              <span>phone</span>
+              <input type="tel" maxLength="20" min="7" max="99" v-model.number="newPerson.phone" placeholder="Phone">
+            </label>
+    
+            <div class="form-footer">
+              <button v-on:click="hideAddPerson" class="btn btn-grey">
+                Cancel
+              </button>
+              <button v-on:click="addPerson" class="btn btn-primary">
+                Add a person</span>
+                <i class="ion ion-android-add"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+  </div>
+</div>
+
+
+  <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
